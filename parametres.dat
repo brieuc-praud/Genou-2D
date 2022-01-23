@@ -1,0 +1,8 @@
+25.   15.   30.   29.   0.01   1.047   'simulation.dat'
+'simulation.dat'       'releves.dat'          'comparaison_cir.dat'
+
+# fichier_donnees_1     fichier_donnees_2     nom_fichier_sortie
+
+# comparaison_cir.dat contient les CIR des fichiers d'entree
+# sous la forme suivante : x1   y1   x2   y2
+# avec x2 et y2 mis à l'échelle par rapport à x1 et y1
