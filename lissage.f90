@@ -1,4 +1,5 @@
 !Lissage par splines cubiques
+
 Module lissage
   Use variables
   Use linalg
@@ -25,44 +26,29 @@ Contains
        h(i) = x(i+1) - x(i)
     End Do
 
-    Q=0. ; R=0.
-    Do i=2, n-1
-       Q(i,i-1) = 1./h(i-1) + 1./h(i)
-    End Do
-    Do i=1, n-2
-       Q(i,i) = - 1./h(i)
-    End Do
-    Do i=3, n
-       Q(i,i-2) = -1./h(i-1)
-    End Do
+    Q=0.
+    R=0.
 
-    Do i=1, n-2
-       R(i,i) = ( h(i)+h(i+1) )/3.
-    End Do
-    Do i=1, n-3
-       R(i,i+1) = - h(i)/6.
-    End Do
     Do i=2, n-2
+       Q(i,i-1) = 1./h(i-1) + 1./h(i)
+       Q(i-1,i-1) = - 1./h(i-1)
+       Q(i+1,i-1) = -1./h(i)
+      
+       R(i-1,i-1) = ( h(i-1)+h(i) )/3.
+       R(i-1,i) = - h(i-1)/6.
        R(i,i-1) = -h(i-1)/6.
     End Do
-
-!!$  Q=0.
-!!$  Do i=2, n-1
-!!$     Q(i,i-1) = 1./h(i-1) + 1./h(i)
-!!$     Q(i-1,i-1) = -1./h(i-1)
-!!$     Q(i+1,i-1) = -1./h(i-1)
-!!$  End Do
-!!$  R=0.
-!!$  R(1,1) = (h(1) + h(2))/3.
-!!$  Do i=2, n-2
-!!$     R(i,i) = (h(i) + h(i+1))/3.
-!!$     R(i-1,i) = -h(i-1)/6.
-!!$     R(i,i-1) = -h(i-1)/6.
-!!$  End Do
+    Q(n-1,n-2) = 1./h(n-2) + 1./h(n-1)
+    Q(n-2,n-2) = - 1./h(n-2)
+    Q(n,n-2) = -1./h(n-1)
+      
+    R(n-2,n-2) = ( h(n-2)+h(n-1) )/3.
+    
 
     K = Matmul(Matmul(Q, inv(R)), Transpose(Q))
     K = lambda * K
-    Do i=1, n ! ajout de l'identité
+    ! ajout de l'identité
+    Do i=1, n
        K(i,i) = K(i,i) + 1
     End Do
     
