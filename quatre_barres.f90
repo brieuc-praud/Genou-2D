@@ -24,9 +24,8 @@ Contains
     Do While ( beta <= betamax )
        C = intersection_cercles(B, l2, D, l3)
        beta = atan2( Aimag(B-C), Real(B-C) )
-       Write(1,*) Real(B), Aimag(B), Real(C), Aimag(C)
-!!$       Write(1, *) Real(A), Aimag(A), Real(B), Aimag(B), &
-!!$            & Real(C), Aimag(C), Real(D), Aimag(D)
+       Write(1, *) Real(B), Aimag(B), Real(C), Aimag(C),&
+            & Real(A), Aimag(A), Real(D), Aimag(D)
        B = B*exp(i*dalpha)
     End Do
 
