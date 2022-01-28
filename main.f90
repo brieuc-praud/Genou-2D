@@ -6,6 +6,8 @@ Program main
   Implicit None
 
   Integer, Parameter :: nb_lignes_max = 100 !Nombre de lignes maximal que peut avoir un fichier lu
+  Real(PR), parameter :: lambda = 0.9 !Paramètre lambda du lissage
+
   Character(nb_char_max) :: fichier_parametres="parametres.dat"
 
   Real(PR), Dimension(nb_lignes_max, 4) :: donnees1, donnees2
@@ -28,12 +30,13 @@ Program main
   Print *, "Lecture des fichiers : ", fichier1, " et ", fichier2
   Print *, "Ecriture dans : ", fichier_sortie_cir
 
-  !Lire les fichier d'entrée
+  !Lire les fichiers d'entrée
   Call lire(fichier1, donnees1, n1)
   Call lire(fichier2, donnees2, n2)
 
-  Call lisser(donnees2(:n2,1), donnees2(:n2,2), .9_PR)
-  Call lisser(donnees2(:n2,3), donnees2(:n2,4), .9_PR)
+  !La série de donnée "donnees2" correspond à des relevés effectués sur une vidéo, il faut donc les lisser pour obtenir le CIR de manière plus précise
+  Call lisser(donnees2(:n2,1), donnees2(:n2,2), lambda)
+  Call lisser(donnees2(:n2,3), donnees2(:n2,4), lambda)
   
   nmax = max(n1, n2)
   nmin = min(n1, n2)
@@ -77,7 +80,7 @@ Program main
   
   
 Contains
-  Subroutine lire(nom_fichier, donnees, n)
+  Subroutine lire(nom_fichier, donnees, n) !Lis le fichier "nom_fichier" et met les données lu dans le tableau "donnees"
     Character(nb_char_max), Intent(In) :: nom_fichier
     
     Real(PR), Dimension(:,:), Intent(InOut) :: donnees

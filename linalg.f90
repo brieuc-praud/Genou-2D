@@ -1,12 +1,13 @@
 !Module d'algèbre linéaire
 !(Permet seulement d'obtenir la décomposition LU d'une matrice ou de l'inverser en utilisant cette décomposition)
+
 Module linalg
   Use variables
   Implicit None
 
 Contains
-  !Inverse la matrice carrée A en utilisant la decomposition LU
-  Function inv(A) Result(Ainv)
+
+  Function inv(A) Result(Ainv) !Inverse la matrice carrée A en utilisant la decomposition LU
     !Entree
     Real(PR), Dimension(:,:), Intent(In) :: A
     !Sortie
@@ -42,14 +43,14 @@ Contains
        Uinv(:,j) = Uinv(:,j)/M(j,j)
     End Do
 
-    M = Matmul(Uinv, Linv) !Pourrait être optimisé
+    M = Matmul(Uinv, Linv) !Pourrait être optimisé (produit de matrices creuses)
     ! M stocke maintenant U^(-1)*L^(-1)
     Do i=1, n
        Ainv(:,perm(i)) = M(:,i)
     End Do
   End Function inv
 
-  Subroutine LU(A, M, perm)
+  Subroutine LU(A, M, perm) !Effectue la décomposition LU de la matrice A dans la matrice M
     Real(PR), Dimension(:,:), Intent(In) :: A
     Real(PR), Dimension(Size(A,1),Size(A,1)), Intent(InOut) :: M
     Integer, Dimension(Size(A,1)), Intent(InOut) :: perm

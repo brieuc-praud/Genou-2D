@@ -3,9 +3,8 @@ Module quatre_barres
   Implicit None
   
 Contains
-  Subroutine simulation_quatre_barres(l1, l2, l3, l4, dalpha, betamax, fichier_sortie)
+  Subroutine simulation_quatre_barres(l1, l2, l3, l4, dalpha, betamax, fichier_sortie) !Fais la simulation et écris le résultat dans le fichier spécifié en paramètre
     Complex(PR), Parameter :: i=cmplx(0._PR, 1._PR, Kind=PR)
-    !Fais la simulation et écris le résultat dans le fichier spécifié en paramètre
     Real(PR), Intent(In) :: l1, l2, l3, l4, dalpha, betamax !Dans ce programme, on note a=l1, b=l2, c=l3, d=l4
     Character(nb_char_max), Intent(In) :: fichier_sortie
 
@@ -26,15 +25,16 @@ Contains
        C = intersection_cercles(B, l2, D, l3)
        beta = atan2( Aimag(B-C), Real(B-C) )
        Write(1,*) Real(B), Aimag(B), Real(C), Aimag(C)
-       !Write(1, *) Real(A), Aimag(A), Real(B), Aimag(B), &
-       !     & Real(C), Aimag(C), Real(D), Aimag(D)
+!!$       Write(1, *) Real(A), Aimag(A), Real(B), Aimag(B), &
+!!$            & Real(C), Aimag(C), Real(D), Aimag(D)
        B = B*exp(i*dalpha)
     End Do
 
     Close(1)
     
   End Subroutine simulation_quatre_barres
-  Function intersection_cercles(O1, r1, O2, r2) Result(I)
+
+  Function intersection_cercles(O1, r1, O2, r2) Result(I) !Trouve une des intersections du cercle de centre O1, de rayon r1 et du cercle de centre O2 de rayon r2
     Complex(PR), Intent(In) :: O1, O2 !Centres des cercles
     Real(PR), Intent(In) :: r1, r2 !Rayon des cerles
 
