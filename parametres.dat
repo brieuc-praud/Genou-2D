@@ -1,4 +1,4 @@
-25.   15.   30.   29.   0.01   1.047   'simulation.dat'    #Parametres du modèle 4 barres
+26.   12.  30.   27.   0.01   1.047   'simulation.dat'    #Parametres du modèle 4 barres
 'simulation.dat'       'releves.dat'          'comparaison_cir.dat'    #Fichiers utilisés dans le calcul des CIR
 
 #l1   l2   l3   l4    dalpha   betamax   fichier_sortie_simulation
