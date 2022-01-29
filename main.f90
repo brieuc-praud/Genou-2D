@@ -6,7 +6,7 @@ Program main
   Implicit None
 
   Integer, Parameter :: nb_lignes_max = 100 !Nombre de lignes maximal que peut avoir un fichier lu
-  Real(PR), parameter :: lambda = 0.9 !Paramètre lambda du lissage
+  Real(PR), parameter :: p_lissage = .9 !Paramètre p du lissage : p dans ]0,1] (1 : aucun lissage, 0 : régression linéaire)
 
   Character(nb_char_max) :: fichier_parametres="parametres.dat"
 
@@ -35,8 +35,8 @@ Program main
   Call lire(fichier2, donnees2, n2)
 
   !La série de donnée "donnees2" correspond à des relevés effectués sur une vidéo, il faut donc les lisser pour obtenir le CIR de manière plus précise
-  Call lisser(donnees2(:n2,1), donnees2(:n2,2), lambda)
-  Call lisser(donnees2(:n2,3), donnees2(:n2,4), lambda)
+  Call lisser(donnees2(:n2,1), donnees2(:n2,2), p_lissage)
+  Call lisser(donnees2(:n2,3), donnees2(:n2,4), p_lissage)
   
   nmax = max(n1, n2)
   nmin = min(n1, n2)
