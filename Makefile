@@ -4,6 +4,7 @@ OPT = -O0 -Wall -pedantic
 OBJ = variables.o linalg.o quatre_barres_forces.o lissage.o $(EXE).o
 OUT = 'comparaison_cir.dat'
 
+
 $(EXE)	: $(OBJ)
 	$(F90) $(OPT) -o $(EXE) $^
 
