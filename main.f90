@@ -1,11 +1,11 @@
 Program main
   Use variables
-  Use quatre_barres
+  Use quatre_barres_forces
   Use lissage
   
   Implicit None
 
-  Integer, Parameter :: nb_lignes_max = 100 !Nombre de lignes maximal que peut avoir un fichier lu
+  Integer, Parameter :: nb_lignes_max = 1000 !Nombre de lignes maximal que peut avoir un fichier lu
   Real(PR), parameter :: p_lissage = .9 !Paramètre p du lissage : p dans ]0,1] (1 : aucun lissage, 0 : régression linéaire)
 
   Character(nb_char_max) :: fichier_parametres="parametres.dat"
@@ -129,5 +129,4 @@ Contains
        liste_cir(i,:) = (/ xcir, ycir /)
     End Do
   End Subroutine calcul_cir
-
 End Program

@@ -1,8 +1,9 @@
 EXE = main
 F90 = gfortran
 OPT = -O0 -Wall -pedantic
-OBJ = variables.o quatre_barres.o linalg.o lissage.o $(EXE).o
+OBJ = variables.o linalg.o quatre_barres_forces.o lissage.o $(EXE).o
 OUT = 'comparaison_cir.dat'
+
 
 $(EXE)	: $(OBJ)
 	$(F90) $(OPT) -o $(EXE) $^
@@ -19,6 +20,11 @@ exe	: $(EXE)
 plot	:
 	gnuplot -e "set title 'Positions successives du centre instantané de rotation (CIR) au cours du mouvement' ; plot $(OUT)  u 1:2 w lp title 'CIR du modèle', $(OUT) u 3:4 w lp title 'CIR du relevé'; pause -1"
 
+anim 	:
+	python3 animation.py
+
 exeplot :
-	make exe
-	make plot
+	make exe && make plot
+
+exeanim :
+	make exe && make anim
