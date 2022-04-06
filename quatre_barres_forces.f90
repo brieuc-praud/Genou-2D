@@ -73,7 +73,6 @@ Contains
   Function F(beta) Result(force)
     Real(PR), Intent(In) :: beta
     Real(PR) :: force
-    !force = 800.
     force = -(16*beta-6.5)**4 + 30*(16*beta-6.5)**2 + 600
   End function F
 
@@ -87,15 +86,13 @@ Contains
     Complex(PR), Intent(In) :: A, B, C, D
     
     Real(PR) :: alpha, beta, gamma
-    Integer :: i
-
     ! === Modification de M ===    
     ! = Isolement de {3} =
     ! - Résultantes -
-    M(1,3) = 1!23x
-    M(2,4) = 1!23y
-    M(1,5) = -1!-34x
-    M(2,6) = -1!-34y
+    M(1,3) = 1._PR!23x
+    M(2,4) = 1._PR!23y
+    M(1,5) = -1._PR!-34x
+    M(2,6) = -1._PR!-34y
     ! - Moments -   
     M(3,3) = -Aimag(C-A)!23x
     M(3,4) = Real(C-A)!23y
@@ -103,34 +100,34 @@ Contains
     M(3,6) = -Real(D-A)!-34y
     ! = Isolement de {2,3} =
     ! - Résultantes -
-    M(4,1) = 1!12x
-    M(5,2) = 1!12y
-    M(4,5) = -1!-34x
-    M(5,6) = -1!-34y
+    M(4,1) = 1._PR!12x
+    M(5,2) = 1._PR!12y
+    M(4,5) = -1._PR!-34x
+    M(5,6) = -1._PR!-34y
     ! - Moments -   
     M(6,1) = -Aimag(B-A)!12x
     M(6,2) = Real(B-A)!12y
     M(6,5) = Aimag(D-A)!-34x
     M(6,6) = -Real(D-A)!-34y
-    M(6,9) = 1!Tau
+    M(6,9) = 1._PR!Tau
     ! = Isolement de {4} =
     ! - Résultantes -
-    M(7,5) = 1!34x
-    M(8,6) = 1!34y
-    M(7,7) = 1!-41x
-    M(8,8) = 1!-41y
+    M(7,5) = 1._PR!34x
+    M(8,6) = 1._PR!34y
+    M(7,7) = 1._PR!-41x
+    M(8,8) = 1._PR!-41y
     ! - Moments -
     M(9,5) = -Aimag(D-A)!34x
     M(9,6) = Real(D-A)!34y
     !-41x
     !-41y
-    M(9,9) = -1!Tau
+    M(9,9) = -1._PR!Tau
       
 
     ! === Calcul des actions internes ===
     alpha = Atan( Aimag(B-A), Real(B-A) )
     gamma = Atan2( Aimag(C-D), Real(C-D) )
-    actions = -Matmul(inv(M), (/ 0,0,0,0,1,0,0,-1,0 /))*F(beta)
+    actions = -Matmul(inv(M), (/ 0._PR,0._PR,0._PR,0._PR,1._PR,0._PR,0._PR,-1._PR,0._PR /))*F(beta)
 
     ! === Calcul des longueurs des ligaments ===
     l1 = (actions(7)*Cos(alpha) + actions(8)*Sin(alpha))/Kacl  +  l10!ACL
