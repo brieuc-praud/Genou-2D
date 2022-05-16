@@ -23,8 +23,8 @@ Contains
     perm = (/ (i,i=1,n) /)
     Call LU(A, M, perm)
 
-    Linv = 0.
-    Linv(1,1)=1.
+    Linv = 0._PR
+    Linv(1,1)=1._PR
     Do i=2, n
        Linv(i,i) = 1.
        Do j=1, i-1
@@ -33,7 +33,7 @@ Contains
           End Do
        End Do
     End Do
-    Uinv = 0.
+    Uinv = 0._PR
     Uinv(1,1)=1./M(1,1)
     Do j=2, n
        Uinv(j,j) = 1.

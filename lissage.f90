@@ -26,8 +26,8 @@ Contains
        h(i) = x(i+1) - x(i)
     End Do
 
-    Q=0.
-    R=0.
+    Q=0._PR
+    R=0._PR
 
     Do i=2, n-2
        Q(i,i-1) = 1./h(i-1) + 1./h(i)

@@ -18,7 +18,7 @@ exe	: $(EXE)
 	./$(EXE)
 
 plot	:
-	gnuplot -e "set title 'Positions successives du centre instantané de rotation (CIR) au cours du mouvement' ; plot $(OUT)  u 1:2 w lp title 'CIR du modèle', $(OUT) u 3:4 w lp title 'CIR du relevé'; pause -1"
+	gnuplot -e "set title 'Positions successives du centre instantané de rotation (CIR) au cours du mouvement' ; plot $(OUT)  u 1:2 w l title 'CIR du modèle', $(OUT) u 3:4 w l title 'CIR du relevé'; pause -1"
 
 anim 	:
 	python3 animation.py

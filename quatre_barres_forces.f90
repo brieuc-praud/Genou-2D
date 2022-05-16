@@ -25,8 +25,8 @@ Contains
     !L'algorithme utilisé  n'est pas très coûteux en ressources. On se permet donc d'ouvrir le fichier avant de faire les calculs.
     Open(1, File=fichier_sortie, Action="Write")
     
-    beta = 0
-    M = 0
+    beta = 0._PR
+    M = 0._PR
     l10 = l1 ; l30 = l3
     Do While ( beta <= betamax )
        Call Calcul_longueur_ligaments(M, actions, A, B, C, D, l1, l3, l10, l30)
@@ -58,7 +58,7 @@ Contains
 
     delta = G**2 - 4*F*H
     
-    If (delta < 0.) Then
+    If (delta < 0._PR) Then
        Print *, "ERREUR : l'intersection n'existe pas"
        Call Exit()
     End If
